@@ -1,0 +1,13 @@
+# 2. Clone fork
+git clone <your-fork-url>
+cd repo-name
+
+# 3. Create branch
+git checkout -b my-feature
+
+# 4. Make changes
+git add .
+git commit -m "My changes"
+
+# Push
+git push origin my-feature
