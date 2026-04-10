@@ -1,0 +1,16 @@
+# 1. Create branches
+git checkout -b branch1
+echo "Hello from branch1" > file.txt
+git commit -am "branch1 change"
+
+git checkout main
+git checkout -b branch2
+echo "Hello from branch2" > file.txt
+git commit -am "branch2 change"
+
+# 3. Merge branch1
+git checkout main
+git merge branch1
+
+# 4. Merge branch2 (conflict)
+git merge branch2
