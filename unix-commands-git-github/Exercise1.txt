@@ -1,0 +1,19 @@
+# 1. Create directory & initialize git
+mkdir git-practice
+cd git-practice
+git init
+
+# 2. Create README.md
+echo "# My Project" > README.md
+
+# 3. Add & commit
+git add README.md
+git commit -m "Initial commit with README"
+
+# 4. Make changes
+echo "Some changes" >> README.md
+git add README.md
+git commit -m "Updated README"
+
+# 5. View history
+git log
