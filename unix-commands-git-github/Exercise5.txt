@@ -1,0 +1,21 @@
+# 1. Init repo
+git init
+touch file1.txt file2.txt
+
+# 2. .gitignore
+echo "node_modules/" > .gitignore
+
+# 3. Stash
+git add .
+git stash
+
+# Bring back
+git stash pop
+
+# 4. Tag release
+git tag v1.0
+
+# 5. Push to GitHub
+git remote add origin <repo-url>
+git push -u origin main
+git push origin v1.0
