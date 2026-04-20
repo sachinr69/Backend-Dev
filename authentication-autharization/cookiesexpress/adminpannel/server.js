@@ -5,25 +5,19 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 
-// 🔐 Session Setup
 app.use(session({
   secret: "secret123",
   resave: false,
   saveUninitialized: true
 }));
 
-// View engine
 app.set("view engine", "ejs");
 
-
-// 🔹 Dummy Users (Role-based)
 const users = [
   { username: "admin", password: "123", role: "admin" },
   { username: "user", password: "123", role: "user" }
 ];
 
-
-// 🔹 Middleware: Check Login
 function isAuthenticated(req, res, next) {
   if (req.session.user) {
     next();
@@ -32,7 +26,6 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-// 🔹 Middleware: Check Admin Role
 function isAdmin(req, res, next) {
   if (req.session.user && req.session.user.role === "admin") {
     next();
@@ -41,15 +34,10 @@ function isAdmin(req, res, next) {
   }
 }
 
-
-// 🔹 Routes
-
-// Login Page
 app.get("/", (req, res) => {
   res.render("login");
 });
 
-// Handle Login
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -66,26 +54,19 @@ app.post("/login", (req, res) => {
 });
 
 
-// Dashboard (All logged-in users)
 app.get("/dashboard", isAuthenticated, (req, res) => {
   res.render("dashboard", { user: req.session.user });
 });
 
-
-// Admin Panel (Only admin)
 app.get("/admin", isAuthenticated, isAdmin, (req, res) => {
   res.render("admin", { user: req.session.user });
 });
 
-
-// Logout
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
 });
 
-
-// Start server
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
